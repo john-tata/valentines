@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import Spline from "@splinetool/react-spline";
+
 
 export default function Ask() {
   const navigate = useNavigate();
@@ -50,8 +52,21 @@ useEffect(() => {
 }, []);
 
 
-  return (
-    <div style={styles.container}>
+ return (
+  <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
+
+    {/* Spline background */}
+    <Spline
+      scene="https://prod.spline.design/B7gE5lA2w1ThYM5o/scene.splinecode"
+      style={{
+        position: "absolute",
+        inset: 0,
+        zIndex: 0,
+      }}
+    />
+
+    {/* Content on top */}
+    <div style={{ ...styles.container, zIndex: 1 }}>
       <h1>Will you be my Valentine? 💘</h1>
 
       <button
@@ -65,11 +80,16 @@ useEffect(() => {
       <button
         style={{ ...styles.no, top: noPos.top, left: noPos.left }}
         onMouseEnter={moveNo}
+        onClick={moveNo}
+        onTouchStart={moveNo}
       >
         NO 💀
       </button>
     </div>
-  );
+
+  </div>
+);
+
 }
 
 const styles = {
